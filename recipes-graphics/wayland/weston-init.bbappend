@@ -6,6 +6,7 @@ SRC_URI:append = " \
     file://weston-rdp-virtual-screen.ini \
     file://weston-systemd-service-override.conf \
     file://weston-launcher.sh \
+    file://weston-user.sh \
 "
 
 # Note that the encrypted password is generated with the following command:
@@ -21,6 +22,7 @@ do_install:append() {
 	install -d -m 0777 ${D}${sysconfdir}/keys/
 	install -d -m -755 ${D}${bindir}
 	install -m 0755 ${WORKDIR}/weston-launcher.sh ${D}${bindir}
+	install -m 0755 ${WORKDIR}/weston-user.sh ${D}${bindir}
 	echo 'WESTON_MODE="vnc-virtual"' >> ${D}${sysconfdir}/default/weston
 }
 FILES:${PN}:append = " \
@@ -28,4 +30,6 @@ FILES:${PN}:append = " \
     ${sysconfdir}/xdg/weston/weston-vnc-virtual-screen.ini \
     ${sysconfdir}/xdg/weston/weston-rdp-virtual-screen.ini \
     ${sysconfdir}/keys/ \
+    ${bindir}/weston-launcher.sh \
+    ${bindir}/weston-user.sh \
 "
