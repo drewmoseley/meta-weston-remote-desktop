@@ -1,4 +1,5 @@
-This README file contains information on the contents of the meta-weston-remote-desktop layer.
+This README file contains information on the contents of the
+meta-weston-remote-desktop layer.
 
 Dependencies
 ============
@@ -16,19 +17,24 @@ Table of Contents
 I. Adding the meta-weston-remote-desktop layer to your build
 ============================================================
 
-  I. Setup a proper build using the Toradex instructions linked above.  Make sure to build the tdx-reference-multimedia-image.
+  I. Setup a proper build using the Toradex instructions linked above.  Make
+  	 sure to build the tdx-reference-multimedia-image.  
   II. Run 'bitbake-layers add-layer <path-to>/meta-weston-remote-desktop'
   III. Rebuild the tdx-reference-multimedia-image.
 
 II. Configuring Remote Desktop
 ==============================
 
-Currently this layer supports two methods of graphical display sharing; vnc and rdp, both using a virtual display. To select
-the desired mode, modify the target file "/etc/default/weston".  This can be done directly on the target, or on the build
-system by modifying the `recipes-graphics/wayland/weston-init.bbappend` file.  Valid values for the "WESTON_MODE" variable are:
+Currently this layer supports two methods of graphical display sharing; vnc and
+rdp, both using a virtual display. To select the desired mode, modify the target
+file "/etc/default/weston".  This can be done directly on the target, or on the
+build system by modifying the `recipes-graphics/wayland/weston-init.bbappend`
+file.  Valid values for the "WESTON_MODE" variable are:
+
   * vnc-virtual
   * rdp-virtual
   * <empty> (which will run the standard DRM-based backend)
 
-Additional configuration, such as screen size, can be done by editing the `weston-*.ini` files either on the device
-in the `/etc/xdg/weston` directory or as part of the build in the `recipes-graphics/wayland/files` directory.
+Additional configuration, such as screen size, can be done by editing the
+`weston-*.ini` files either on the device in the `/etc/xdg/weston` directory or
+as part of the build in the `recipes-graphics/wayland/files` directory.
