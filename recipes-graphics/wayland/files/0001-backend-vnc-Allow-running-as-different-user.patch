@@ -1,0 +1,31 @@
+From 34c80f47d2d2530adb5ba3692c7961716240a22c Mon Sep 17 00:00:00 2001
+From: Drew Moseley <drew@moseleynet.net>
+Date: Wed, 4 Jun 2025 17:32:44 -0400
+Subject: [PATCH] backend-vnc: Allow running as different user.
+
+When running with the VNC backend the default behavior is to ensure that weston is
+running as the same user that is configured for VNC connections.  However in the case
+of the Toradex reference image, we want weston to be running as root but still allow
+VNC connections.
+
+Signed-off-by: Drew Moseley <drew@moseleynet.net>
+---
+ libweston/backend-vnc/vnc.c | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/libweston/backend-vnc/vnc.c b/libweston/backend-vnc/vnc.c
+index 8099f756..56ae6770 100644
+--- a/libweston/backend-vnc/vnc.c
++++ b/libweston/backend-vnc/vnc.c
+@@ -487,7 +487,7 @@ vnc_handle_auth(const char *username, const char *password, void *userdata)
+ {
+ 	struct passwd *pw = getpwnam(username);
+ 
+-	if (!pw || pw->pw_uid != getuid()) {
++	if (!pw) {
+ 		weston_log("VNC: wrong user '%s'\n", username);
+ 		return false;
+ 	}
+-- 
+2.43.0
+
