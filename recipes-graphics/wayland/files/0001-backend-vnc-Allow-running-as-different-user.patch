@@ -9,6 +9,7 @@ of the Toradex reference image, we want weston to be running as root but still a
 VNC connections.
 
 Signed-off-by: Drew Moseley <drew@moseleynet.net>
+Upstream-Status: Inappropriate [Local Only]
 ---
  libweston/backend-vnc/vnc.c | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
