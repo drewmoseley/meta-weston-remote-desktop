@@ -25,14 +25,16 @@ I. Adding the meta-weston-remote-desktop layer to your build
 II. Configuring Remote Desktop
 ==============================
 
-Currently this layer supports two methods of graphical display sharing; vnc and
-rdp, both using a virtual display. To select the desired mode, modify the target
-file "/etc/default/weston".  This can be done directly on the target, or on the
-build system by modifying the `recipes-graphics/wayland/weston-init.bbappend`
-file.  Valid values for the "WESTON_MODE" variable are:
+Currently this layer supports 5 methods of graphical display sharing.  To select
+the desired mode, modify the target file "/etc/default/weston".  This can be
+done directly on the target, or on the build system by modifying the
+`recipes-graphics/wayland/weston-init.bbappend` file.  Valid values for the
+"WESTON_MODE" variable are:
 
   * vnc-virtual
   * rdp-virtual
+  * vnc-mirror
+  * rdp-mirror
   * <empty> (which will run the standard DRM-based backend)
 
 Additional configuration, such as screen size, can be done by editing the

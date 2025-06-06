@@ -26,9 +26,29 @@ case ${WESTON_MODE} in
                 -days 365 -subj "/CN=${CERT_CN}"
         fi
         ;;
+    vnc-mirror )
+        CLI_EXTRA_PARMS="${CLI_EXTRA_PARMS} --vnc-tls-cert=/etc/keys/vnc-tls.crt --vnc-tls-key=/etc/keys/vnc-tls.key"
+        INI_FILE="weston-vnc-mirror-screen.ini"
+        if [ ! -e /etc/keys/vnc-tls.crt ]; then
+            openssl req -x509 -newkey rsa:2048 -nodes \
+                -keyout /etc/keys/vnc-tls.key \
+                -out /etc/keys/vnc-tls.crt \
+                -days 365 -subj "/CN=${CERT_CN}"
+        fi
+        ;;
     rdp-virtual )
         CLI_EXTRA_PARMS="${CLI_EXTRA_PARMS} --rdp-tls-cert=/etc/keys/rdp-tls.crt --rdp-tls-key=/etc/keys/rdp-tls.key"
         INI_FILE="weston-rdp-virtual-screen.ini"
+        if [ ! -e /etc/keys/rpd-tls.crt ]; then
+            openssl req -x509 -newkey rsa:2048 -nodes \
+                -keyout /etc/keys/rdp-tls.key \
+                -out /etc/keys/rdp-tls.crt \
+                -days 365 -subj "/CN=${CERT_CN}"
+        fi
+        ;;
+    rdp-mirror )
+        CLI_EXTRA_PARMS="${CLI_EXTRA_PARMS} --rdp-tls-cert=/etc/keys/rdp-tls.crt --rdp-tls-key=/etc/keys/rdp-tls.key"
+        INI_FILE="weston-rdp-mirror-screen.ini"
         if [ ! -e /etc/keys/rpd-tls.crt ]; then
             openssl req -x509 -newkey rsa:2048 -nodes \
                 -keyout /etc/keys/rdp-tls.key \

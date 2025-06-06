@@ -1,9 +1,11 @@
 FILESEXTRAPATHS:prepend := "${THISDIR}/files:"
-RDEPENDS:${PN}:append = " openssl "
+RDEPENDS:${PN}:append = " openssl weston-examples "
 
 SRC_URI:append = " \
     file://weston-vnc-virtual-screen.ini \
+    file://weston-vnc-mirror-screen.ini \
     file://weston-rdp-virtual-screen.ini \
+    file://weston-rdp-mirror-screen.ini \
     file://weston.ini \
     file://weston-systemd-service-override.conf \
     file://weston-launcher.sh \
@@ -18,7 +20,9 @@ do_install:append() {
 	install -d -m 0755 ${D}${sysconfdir}/systemd/system/weston.service.d/
 	install -m 0644 ${WORKDIR}/weston-systemd-service-override.conf ${D}${sysconfdir}/systemd/system/weston.service.d/override.conf
 	install -m 0644 ${WORKDIR}/weston-vnc-virtual-screen.ini ${D}${sysconfdir}/xdg/weston/
+	install -m 0644 ${WORKDIR}/weston-vnc-mirror-screen.ini ${D}${sysconfdir}/xdg/weston/
 	install -m 0644 ${WORKDIR}/weston-rdp-virtual-screen.ini ${D}${sysconfdir}/xdg/weston/
+	install -m 0644 ${WORKDIR}/weston-rdp-mirror-screen.ini ${D}${sysconfdir}/xdg/weston/
 	install -m 0644 ${WORKDIR}/weston.ini ${D}${sysconfdir}/xdg/weston/
 	install -d -m 0700 ${D}${sysconfdir}/keys/
 	install -d -m -755 ${D}${bindir}
@@ -28,7 +32,9 @@ do_install:append() {
 FILES:${PN}:append = " \
     ${sysconfdir}/systemd/system/weston.service.d/override.conf \
     ${sysconfdir}/xdg/weston/weston-vnc-virtual-screen.ini \
+    ${sysconfdir}/xdg/weston/weston-vnc-mirror-screen.ini \
     ${sysconfdir}/xdg/weston/weston-rdp-virtual-screen.ini \
+    ${sysconfdir}/xdg/weston/weston-rdp-mirror-screen.ini \
     ${sysconfdir}/xdg/weston/weston.ini \
     ${sysconfdir}/keys/ \
     ${bindir}/weston-launcher.sh \
